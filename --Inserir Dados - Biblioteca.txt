@@ -1,0 +1,56 @@
+--Inserir Dados - Biblioteca
+
+Sintaxe:
+insert into tabela(coluna1, coluna2....)
+values(valor1, valor2...)
+
+--Inserir registros
+--tabela de assuntos
+ 
+insert into Assunto (NomeAssunto)
+values
+('Ficção Cintífica'),('Botânica'),
+('Eletrônica'),('Matemática'),
+('Aventura'),('Romance'),
+('Finanças'),('Gastronomia'),
+('Terror'),('Administração'),
+('Informática'),('Suspense');
+
+--Tabela de Editoras
+INSERT INTO Editora (NomeEditora)
+VALUES
+('Companhia das Letras'),('Grupo Editorial Record'),
+('Globo Livros'),('Editora Moderna'),('Editora Rocco'),
+('Intrínseca'),('Darkside Books');
+
+--select*from Editora
+
+--Tabela de autores
+select*from Autor
+INSERT INTO Autor (NomeAutor, SobrenomeAutor)
+VALUES 
+('Machado','de Assis'), ('Isaac','Asimov'),
+('Stephen','Hawking'),('Clarice','Lispector'),('Carolina Maria','de Jesus'),('Cecilia','Meireles'),('Alvares','de Azevedo'),('Ziraldo','Alves) Pinto'),('Graciliano','Ramos'),('Guimaraes','Rosa'),
+('Agostinho','de Hipona'),('Immanuel','Kant'),
+('Rene','Descartes'),('Albert','Camus'),
+('Tomas','de Aquino'), ('Tales','de Mileto'),
+('John','Locke'),('Leandro','Karnal'),
+('Clovis','de Barros Filho'),('Mario','Sergio Cortella'),
+('Paulo','Freire'),('Jane','Austen'),
+('Mary','Shelley'),('Algernon','Blackwood');
+
+--Tabela de livros
+INSERT INTO Livro (NomeLivro, ISBN13, DataPub, PrecoLivro, NumeroPaginas, IdEditora, IdAssunto)
+VALUES 
+('Eu Robo','9788576571667','19501202',35.74, 300, 1, 3);
+
+--Tabela LivroAutor
+INSERT INTO LivroAutor (IdLivro,IdAutor)
+VALUES 
+(100,15),
+(100,16),
+(101,27),
+(102,26);
+
+
+

@@ -1,0 +1,85 @@
+Criar banco de dados para uma biblioteca:
+Requisitos do bd:
+-nomes dos livros
+-nomes e sobrenome de autores
+-nomes de editoras
+-preços e datass de publicação dos livros
+-num ISBN 13 de cada obra
+-quantidade de página de cada livro
+
+Requisitos do banco biblioteca:
+-todo livro terá um nome e um ISBN cadastrado
+-todo autor terá nome e sobrenome cadastrado
+-os livros wpodem ter mais de um autor
+-códigos de ID dos livros iniciam a partir de 100
+-toda editora terá um nome cadastrado
+-todo livro pertencerá a um única assunto(principal)
+-todo livro terá preço, mas não é obrigatória a data de publicação
+-o num de pagina de cada livro é obrigatório
+
+Tabelas
+-tabela de livros
+-autores
+-editoras
+-arquivos
+-livrosAutores(associativa)
+
+-----------------------------------------
+create database Biblioteca;
+
+use Biblioteca;
+
+create table Autor(
+	IdAutor smallint identity,
+	NomeAutor varchar(50) not null,
+	SobrenomeAutor varchar(60) not null, 
+	constraint pk_id_autor primary key(IdAutor)
+);
+
+sp_help Autor; --info da tabela Autor
+
+
+--Tabela editora
+CREATE TABLE Editora(
+	IdEditora SMALLINT PRIMARY KEY IDENTITY,
+	NomeEditora VARCHAR(50) NOT NULL
+);
+
+--Tabela Assunto
+create table Assunto(
+	IdAssunto tinyint primary key identity,
+	NomeAssunto varchar(25) not null
+);
+
+--Tabela de Livro
+create table Livro(
+	IdLivro smallint not null primary key identity(100,1),
+	NomeLivro varchar(70) not null,
+	ISBN13 char(13) unique not null,
+	DataPub date,
+	PrecoLivro money not null,
+	NumPag smallint not null,
+	IdEditora smallint not null,
+	IdAssunto tinyint not null,
+
+	constraint fk_id_editora foreign key(IdEditora) 	references Editora(IdEditora) on delete cascade,
+
+	constraint fk_id_assunto foreign key(IdAssunto) 	references Assunto(IdAssunto) on delete cascade,
+	
+	constraint verifica_preco check(PrecoLivro >= 0)
+
+);
+
+--Tabela de LivroAutor
+create table LivroAutor(
+	IdLivro smallint not null,
+
+	IdAutor smallint not null,
+
+	constraint fk_id_livros foreign key(IdLivro) 	references Livro(IdLivro),
+
+	constraint fk_id_autores foreign key(IdAutor) 	references Autor(IdAutor),
+
+	constraint pk_livro_autor primary key(IdLivro, 	IdAutor) 
+);
+
